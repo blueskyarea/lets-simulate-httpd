@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: filebeat-config
+data:
+  filebeat.yml: |
+    filebeat.inputs:
+      -type: log
+        paths:
+          - /usr/local/tomcat/logs/*.log
+    output.console:
+      enabled: true

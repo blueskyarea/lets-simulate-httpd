@@ -1,0 +1,8 @@
+# Dockerfile for Apache HTTP Server
+FROM httpd:2.4.64
+
+# Copy custom configuration
+COPY ./httpd.conf /usr/local/apache2/conf/httpd.conf
+
+# Expot port
+EXPOSE 80
