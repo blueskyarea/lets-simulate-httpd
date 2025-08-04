@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,6 +18,7 @@ spec:
       containers:
         - name: tomcat
           image: my-tomcat:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
           volumeMounts:
@@ -30,7 +32,7 @@ spec:
 ---
 apiVersion: v1
 kind: Service
-meatdata:
+metadata:
   name: tomcat-service
   labels:
     app: tomcat
