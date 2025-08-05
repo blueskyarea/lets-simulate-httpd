@@ -6,13 +6,13 @@ metadata:
 spec:
   selector:
     istio: ingressgateway
-    servers:
-      - port:
+  servers:
+    - port:
         number: 80
         name: http
         protocol: HTTP
-    hosts:
-      - "*"
+      hosts:
+        - "*"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -26,12 +26,12 @@ spec:
   http:
     - match:
         - uri:
-          prefix: /httpd
-  route:
-    - destination:
-      host: httpd-service
-      port:
-        number: 80
+            prefix: /httpd
+      route:
+        - destination:
+            host: httpd-service
+            port:
+              number: 80
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -45,9 +45,11 @@ spec:
   http:
     - match:
         - uri:
-          prefix: /tomcat
-  route:
-    - destination:
-        host: tomcat-service
-        port:
-          number: 8080
+            prefix: /tomcat
+      rewrite:
+        uri: /lets-simulate-httpd-1.0-SNAPSHOT
+      route:
+        - destination:
+            host: tomcat-service
+            port:
+              number: 8080
