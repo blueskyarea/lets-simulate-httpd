@@ -47,7 +47,7 @@ spec:
         - uri:
             prefix: /tomcat
       rewrite:
-        uri: /lets-simulate-httpd-1.0-SNAPSHOT
+        uri: /hello
       route:
         - destination:
             host: tomcat-service

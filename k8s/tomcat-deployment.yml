@@ -21,6 +21,8 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
+        - name: filebeat
+          image: docker.elastic.co/beats/filebeat:7.17.0
           volumeMounts:
             - name: filebeat-config
               mountPath: /etc/filebeat/filebeat.yml
