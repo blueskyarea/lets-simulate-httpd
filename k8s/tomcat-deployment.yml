@@ -3,8 +3,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tomcat-deployment
-  labels:
-    app: tomcat
 spec:
   replicas: 2
   selector:
@@ -21,16 +19,9 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
-        - name: filebeat
-          image: docker.elastic.co/beats/filebeat:7.17.0
-          volumeMounts:
-            - name: filebeat-config
-              mountPath: /etc/filebeat/filebeat.yml
-              subPath: filebeat.yml
-      volumes:
-        - name: filebeat-config
-          configMap:
-            name: filebeat-config
+          env:
+            - name: GLIBC_TUNABLES
+              value: glibc.cpu.hwcaps=-RSEQ
 ---
 apiVersion: v1
 kind: Service

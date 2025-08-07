@@ -1,4 +1,4 @@
-# Dockerfile for Tomcat with Filebeat
+# Dockerfile for Tomcat
 FROM tomcat:11.0.9-jdk17
 
 # Install curl
@@ -7,14 +7,8 @@ RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 # Add the application to the Tomcat webapps directory
 COPY ./ROOT.war /usr/local/tomcat/webapps/
 
-# Install Filebeat
-RUN apt-get update && apt-get install -y wget && \
-    wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.17.0-amd64.deb && \
-    dpkg -i filebeat-7.17.0-amd64.deb && \
-    rm filebeat-7.17.0-amd64.deb
-
 # Expose port 8080 for Tomcat
 EXPOSE 8080
 
-# Start both Tomcat and Filebeat
-CMD ["sh", "-c", "/usr/local/tomcat/bin/catalina.sh run & filebeat -e"]
+# Start both Tomcat
+CMD ["sh", "-c", "/usr/local/tomcat/bin/catalina.sh run]
