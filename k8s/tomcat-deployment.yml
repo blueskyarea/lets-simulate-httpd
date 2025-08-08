@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: tomcat-deployment
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: tomcat
@@ -20,8 +20,10 @@ spec:
           ports:
             - containerPort: 8080
           env:
-            - name: GLIBC_TUNABLES
-              value: glibc.cpu.hwcaps=-RSEQ
+            - name: JVM_ROUTE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
 ---
 apiVersion: v1
 kind: Service

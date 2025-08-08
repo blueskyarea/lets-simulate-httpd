@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/hello")
 public class HelloServlet extends HttpServlet {
@@ -20,6 +21,11 @@ public class HelloServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         logger.info("Accessed to /hello the application.");
+
+        // Create a session
+        HttpSession session = request.getSession(true);
+        session.setAttribute("key", "value");
+
         response.getWriter().println("Hello from Tomcat!");
     }
 }
