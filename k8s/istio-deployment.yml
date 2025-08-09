@@ -29,7 +29,7 @@ spec:
             prefix: /httpd
       route:
         - destination:
-            host: httpd-service
+            host: httpd-service.default.svc.cluster.local
             port:
               number: 80
 ---
@@ -58,20 +58,6 @@ metadata:
   name: tomcat-destinationrule
 spec:
   host: tomcat-service.default.svc.cluster.local
-  trafficPolicy:
-    loadBalancer:
-      consistentHash:
-        httpCookie:
-          name: JSESSIONID
-          ttl: 0s
----
-apiVersion: networking.istio.io/v1alpha3
-kind: DestinationRule
-metadata:
-  name: httpd-destinationrule
-  namespace: default
-spec:
-  host: httpd-service.default.svc.cluster.local
   trafficPolicy:
     loadBalancer:
       consistentHash:
