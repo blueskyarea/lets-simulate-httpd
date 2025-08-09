@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/hello")
+@WebServlet("/tomcat")
 public class HelloServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     protected final static Logger logger = LoggerFactory.getLogger(HelloServlet.class);
@@ -21,7 +21,7 @@ public class HelloServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        logger.info("Accessed to /hello the application.");
+        logger.info("Accessed to the application.");
 
         // Check if a session exists
         HttpSession session = request.getSession(false); // Do not create a new session

@@ -46,8 +46,6 @@ spec:
     - match:
         - uri:
             prefix: /tomcat
-      rewrite:
-        uri: /hello
       route:
         - destination:
             host: tomcat-service.default.svc.cluster.local
@@ -59,7 +57,7 @@ kind: DestinationRule
 metadata:
   name: tomcat-destinationrule
 spec:
-  host: tomcat-service
+  host: tomcat-service.default.svc.cluster.local
   trafficPolicy:
     loadBalancer:
       consistentHash:
@@ -79,5 +77,4 @@ spec:
       consistentHash:
         httpCookie:
           name: JSESSIONID
-          path: /httpd
           ttl: 0s
