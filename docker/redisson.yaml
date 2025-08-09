@@ -1,0 +1,8 @@
+singleServerConfig:
+  address: "redis://redis:6379"
+  database: 0
+  connectionPoolSize: 64
+  connectionMinimumIdleSize: 24
+threads: 16
+nettyThreads: 32
+codec: !<org.redisson.codec.JsonJacksonCodec> {}

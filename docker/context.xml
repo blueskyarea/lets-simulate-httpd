@@ -1,2 +1,6 @@
-<Context cookies="true">
+<Context>
+    <Manager className="org.redisson.tomcat.RedissonSessionManager"
+             configPath="/usr/local/tomcat/conf/redisson.yaml"
+             readMode="REDIS"
+             updateMode="DEFAULT" />
 </Context>
