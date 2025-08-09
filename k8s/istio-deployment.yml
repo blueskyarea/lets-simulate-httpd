@@ -50,6 +50,34 @@ spec:
         uri: /hello
       route:
         - destination:
-            host: tomcat-service
+            host: tomcat-service.default.svc.cluster.local
             port:
               number: 8080
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: tomcat-destinationrule
+spec:
+  host: tomcat-service
+  trafficPolicy:
+    loadBalancer:
+      consistentHash:
+        httpCookie:
+          name: JSESSIONID
+          ttl: 0s
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: httpd-destinationrule
+  namespace: default
+spec:
+  host: httpd-service.default.svc.cluster.local
+  trafficPolicy:
+    loadBalancer:
+      consistentHash:
+        httpCookie:
+          name: JSESSIONID
+          path: /httpd
+          ttl: 0s

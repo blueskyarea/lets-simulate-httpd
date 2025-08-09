@@ -1,6 +1,7 @@
 package com.itstudy365;
 
 import java.io.IOException;
+import java.net.InetAddress;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,10 +23,21 @@ public class HelloServlet extends HttpServlet {
             throws ServletException, IOException {
         logger.info("Accessed to /hello the application.");
 
-        // Create a session
-        HttpSession session = request.getSession(true);
-        session.setAttribute("key", "value");
+        // Check if a session exists
+        HttpSession session = request.getSession(false); // Do not create a new session
+        if (session == null) {
+            // No session exists, create a new one for the first access
+            logger.info("No session found. Creating a new session.");
+            session = request.getSession(true); // Create a new session
+            session.setAttribute("key", "value");
+            response.getWriter().println("A new session has been created. Session ID: " + session.getId()
+                    + " Served by: " + InetAddress.getLocalHost().getHostName());
+            return;
+        }
 
-        response.getWriter().println("Hello from Tomcat!");
+        // If session exists, proceed with normal processing
+        logger.info("Session found. Session ID: " + session.getId());
+        response.getWriter().println("Session found. Session ID: " + session.getId() + " Served by: "
+                + InetAddress.getLocalHost().getHostName());
     }
 }
