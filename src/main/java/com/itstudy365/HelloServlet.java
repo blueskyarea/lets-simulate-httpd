@@ -37,6 +37,7 @@ public class HelloServlet extends HttpServlet {
 
         // If session exists, proceed with normal processing
         logger.info("Session found. Session ID: " + session.getId());
+        logger.info("Key: key, Value: " + session.getAttribute("key"));
         response.getWriter().println("Session found. Session ID: " + session.getId() + " Served by: "
                 + InetAddress.getLocalHost().getHostName());
     }

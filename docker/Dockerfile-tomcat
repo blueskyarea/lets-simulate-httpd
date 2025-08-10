@@ -21,14 +21,14 @@ COPY ./ROOT.war /usr/local/tomcat/webapps/
 COPY server.xml.template /usr/local/tomcat/conf/server.xml.template
 
 # Add an entrypoint script to generate server.xml
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
+#COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+#RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Set the entrypoint
-ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
+#ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
 
 # Expose port 8080 for Tomcat
 EXPOSE 8080
 
 # Start both Tomcat
-#CMD ["sh", "-c", "/usr/local/tomcat/bin/catalina.sh run"]
+CMD ["sh", "-c", "/usr/local/tomcat/bin/catalina.sh run"]
